@@ -1,7 +1,11 @@
 import { CiStar } from "react-icons/ci";
+import { Link } from "react-router";
 const Book = ({ book }) => {
   return (
-    <div className="group w-full max-w[250px] overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+    <Link
+      to={`/bookDetails/${book.bookId}`}
+      className="group w-full max-w[250px] overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+    >
       {/* Book Image */}
       <div className="bg-gray-50 p-4">
         <img
@@ -50,7 +54,7 @@ const Book = ({ book }) => {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
