@@ -1,12 +1,32 @@
+import { useContext } from "react";
 import { useLoaderData, useParams } from "react-router";
+import BookContext from "../../context/BookContext";
 
 const BookDetails = () => {
+  const {
+    storeBook,
+    setStoreBook,
+    handleReadBook,
+    wishList,
+    setWishList,
+    handleWishList,
+  } = useContext(BookContext);
+  console.log(
+    storeBook,
+    setStoreBook,
+    handleReadBook,
+    wishList,
+    setWishList,
+    handleWishList,
+  );
+
   const { id } = useParams();
   const books = useLoaderData();
-  console.log(books);
+  // console.log(books);
   // console.log(id);
   const expectedBook = books.find((book) => book.bookId == id);
-  console.log(expectedBook);
+  // console.log(expectedBook);
+
   return (
     <div className="mx-auto max-w-7xl rounded-2xl border border-gray-200 bg-white p-6 shadow-sm md:p-10">
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
@@ -83,12 +103,18 @@ const BookDetails = () => {
 
           {/* Buttons */}
           <div className="mt-10 flex flex-wrap gap-4">
-            <button className="rounded-lg border border-gray-300 px-8 py-3 font-semibold transition hover:bg-gray-100">
-              Read
+            <button
+              onClick={() => handleReadBook(expectedBook)}
+              className="rounded-lg border border-gray-300 px-8 py-3 font-semibold transition hover:bg-gray-100"
+            >
+              Mark as Read
             </button>
 
-            <button className="rounded-lg bg-sky-500 px-8 py-3 font-semibold text-white transition hover:bg-sky-600">
-              Wishlist
+            <button
+              onClick={() => handleWishList(expectedBook)}
+              className="rounded-lg bg-sky-500 px-8 py-3 font-semibold text-white transition hover:bg-sky-600"
+            >
+              Add to Wishlist
             </button>
           </div>
         </div>
