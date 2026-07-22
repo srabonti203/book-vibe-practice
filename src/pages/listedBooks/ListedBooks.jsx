@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import BookContext from "../../context/BookContext";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
@@ -6,26 +6,29 @@ import ListedReadList from "./ListedReadList";
 import ListedWishList from "./ListedWishList";
 
 const ListedBooks = () => {
+  const [sortType, setSortType] = useState("");
   const { storeBook, wishList } = useContext(BookContext);
-  console.log(storeBook, wishList);
+  // console.log(storeBook, wishList);
   return (
     <div>
       {/* shorted drop down */}
-      <div className="dropdown flex justify-center items-center m-6">
-        <div tabIndex={0} role="button" className="btn m-1">
-          Sort
+      <div className="flex justify-center items-center">
+        <div className="dropdown">
+          <div tabIndex={0} role="button" className="btn m-1">
+            Sort By {sortType}
+          </div>
+          <ul
+            tabIndex="-1"
+            className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+          >
+            <li onClick={() => setSortType("pages")}>
+              <a>Pages</a>
+            </li>
+            <li onClick={() => setSortType("rating")}>
+              <a>Rating</a>
+            </li>
+          </ul>
         </div>
-        <ul
-          tabIndex="-1"
-          className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm m-4"
-        >
-          <li>
-            <a>Item 1</a>
-          </li>
-          <li>
-            <a>Item 2</a>
-          </li>
-        </ul>
       </div>
       {/* read and wish list tabs */}
       <div>
@@ -36,10 +39,10 @@ const ListedBooks = () => {
           </TabList>
 
           <TabPanel>
-            <ListedReadList></ListedReadList>
+            <ListedReadList sortType={sortType}></ListedReadList>
           </TabPanel>
           <TabPanel>
-            <ListedWishList></ListedWishList>
+            <ListedWishList sortType={sortType}></ListedWishList>
           </TabPanel>
         </Tabs>
       </div>
