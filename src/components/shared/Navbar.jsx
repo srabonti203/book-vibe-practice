@@ -25,7 +25,7 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
-          to={"/page-tp-read"}
+          to={"/page-to-read"}
           className={({ isActive }) =>
             isActive ? "text-green-500 border border-green-500" : ""
           }
